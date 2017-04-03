@@ -98,7 +98,7 @@
 下面我们来看一下Snackbar是如何使用的
 1、创建一个新的Android项目的时候，是不会主动添加design库的，这样就无法使用Snackbar。所以我们需要在gradle文件中添加一个android的design库的">
 <meta property="og:image" content="https://hurui1990.github.io/hurui.github.io/uploads/snackbar/1.png">
-<meta property="og:updated_time" content="2017-04-03T13:38:56.000Z">
+<meta property="og:updated_time" content="2017-04-03T13:42:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Material Design之Snackbar">
 <meta name="twitter:description" content="在Metarial Design设计语言发布之前，对于用户提示，我们都是用Toast实现的。Snackbar可以完全代替Toast的功能，并且在此基础之上还添加了动作的处理
@@ -356,7 +356,7 @@
 <p>下面我们来看一下Snackbar是如何使用的</p>
 <p>1、创建一个新的Android项目的时候，是不会主动添加design库的，这样就无法使用Snackbar。所以我们需要在gradle文件中添加一个android的design库的依赖</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compile <span class="string">'com.android.support:design:26.0.0-alpha1'</span></div></pre></td></tr></table></figure>
-<p>这里需要注意的是版本号的问题，这里的版本号需要与<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compile <span class="string">'com.android.support:appcompat-v7:26.0.0-alpha1'</span></div></pre></td></tr></table></figure></p>
+<p>这里需要注意的是版本号的问题，因为现在新创建的项目的<strong><em>Activity</em></strong>都是继承的<strong><em>AppCompatActivity</em></strong> 所以这里的版本号需要与<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compile <span class="string">'com.android.support:appcompat-v7:26.0.0-alpha1'</span></div></pre></td></tr></table></figure></p>
 <p>的版本号一直，否则在编译的时候会报错。</p>
 <p><img src="https://hurui1990.github.io/hurui.github.io/uploads/snackbar/1.png" alt="cmd-markdown-logo"></p>
 
