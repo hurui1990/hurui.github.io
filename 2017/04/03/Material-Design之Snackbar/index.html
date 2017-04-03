@@ -91,7 +91,7 @@
 下面我们来看一下Snackbar是如何使用的
 1、创建一个新的Android项目的时候，是不会主动添加design库的，这样就无法使用Snackbar。所以我们需要在gradle文件中添加一个android的design库的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Material Design之Snackbar的简单使用">
+<meta property="og:title" content="Material Design之Snackbar">
 <meta property="og:url" content="https://hurui1990.github.io/2017/04/03/Material-Design之Snackbar/index.html">
 <meta property="og:site_name" content="胡里胡涂的博客">
 <meta property="og:description" content="在Metarial Design设计语言发布之前，对于用户提示，我们都是用Toast实现的。Snackbar可以完全代替Toast的功能，并且在此基础之上还添加了动作的处理
@@ -99,9 +99,9 @@
 1、创建一个新的Android项目的时候，是不会主动添加design库的，这样就无法使用Snackbar。所以我们需要在gradle文件中添加一个android的design库的">
 <meta property="og:image" content="https://hurui1990.github.io/hurui.github.io/uploads/snackbar/snackbar1.png">
 <meta property="og:image" content="https://hurui1990.github.io/hurui.github.io/uploads/snackbar/snackbar2.png">
-<meta property="og:updated_time" content="2017-04-03T15:05:43.000Z">
+<meta property="og:updated_time" content="2017-04-03T15:16:18.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Material Design之Snackbar的简单使用">
+<meta name="twitter:title" content="Material Design之Snackbar">
 <meta name="twitter:description" content="在Metarial Design设计语言发布之前，对于用户提示，我们都是用Toast实现的。Snackbar可以完全代替Toast的功能，并且在此基础之上还添加了动作的处理
 下面我们来看一下Snackbar是如何使用的
 1、创建一个新的Android项目的时候，是不会主动添加design库的，这样就无法使用Snackbar。所以我们需要在gradle文件中添加一个android的design库的">
@@ -139,7 +139,7 @@
 
 
 
-  <title> Material Design之Snackbar的简单使用 | 胡里胡涂的博客 </title>
+  <title> Material Design之Snackbar | 胡里胡涂的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -279,7 +279,7 @@
             
             
               
-                Material Design之Snackbar的简单使用
+                Material Design之Snackbar
               
             
           </h1>
@@ -360,6 +360,7 @@
 <p>这里需要注意的是版本号的问题，因为现在新创建的项目的<strong><em>Activity</em></strong>都是继承的<strong><em>AppCompatActivity</em></strong> 所以这里的版本号需要与下面的版本号一致，<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compile <span class="string">'com.android.support:appcompat-v7:26.0.0-alpha1'</span></div></pre></td></tr></table></figure></p>
 <p>否则在编译的时候会报错。</p>
 <p>接下来我们就可以在<strong><em>Activity</em></strong>中欢快的调用Snackbar了,调用的时候需要用一个控件容器去容纳Snackbar，Google官方推荐的是CoordinatorLayout,因为使用这个控件作为容器的时候，用户还可以通过向右滑动来移除Snackbar。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">mButtonClick = (Button) findViewById(R.id.button_click);</div><div class="line">mCoordinator = (CoordinatorLayout) findViewById(R.id.coordinator);</div><div class="line"></div><div class="line">mButtonClick.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>&#123;</div><div class="line">        Snackbar.make(mCoordinator,<span class="string">"文件已经删除"</span>,Snackbar.LENGTH_LONG).show();</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>多个Snackbar的显示机制相较于Toast而言是由很大的改善的，Toast在多次点击显示的时候，会依次显示，直到多有的Toast全部显示完毕，但是Snackbar无论点击显示多少次，都会只显示最后一个，如果已经有一个Snackbar在显示的话，则会移除掉已经显示的Snackbar。</p>
 <p><img src="https://hurui1990.github.io/hurui.github.io/uploads/snackbar/snackbar1.png" alt="cmd-markdown-logo"></p>
 <p>这个是Snackbar最基本的用法，此外我们还可以对Snackbar添加一个Action<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">mButtonClick = (Button) findViewById(R.id.button_click);</div><div class="line">   mCoordinator = (CoordinatorLayout) findViewById(R.id.coordinator);</div><div class="line"></div><div class="line">   mButtonClick.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</div><div class="line">       <span class="meta">@Override</span></div><div class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>&#123;</div><div class="line">           Snackbar.make(mCoordinator,<span class="string">"文件已经删除"</span>,Snackbar.LENGTH_LONG)</div><div class="line">                   .setAction(<span class="string">"Retry"</span>, <span class="keyword">new</span> View.OnClickListener() &#123;</div><div class="line">                       <span class="meta">@Override</span></div><div class="line">                       <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>&#123;</div><div class="line">                           Toast.makeText(MainActivity.<span class="keyword">this</span>, <span class="string">"点击Retry，我就出现了！"</span>, Toast.LENGTH_LONG).show();</div><div class="line">                       &#125;</div><div class="line">                   &#125;)</div><div class="line">                   .setActionTextColor(Color.RED)</div><div class="line">                   .show();</div><div class="line">       &#125;</div><div class="line">   &#125;);</div></pre></td></tr></table></figure></p>
 <p>添加了Action之后，Snackbar的右边就多出了一个按钮，点击这个按钮就可以添加我们想要执行的任务了，我们在这里只是想要弹出一个Toast就行了<br><img src="https://hurui1990.github.io/hurui.github.io/uploads/snackbar/snackbar2.png" alt="cmd-markdown-logo"></p>
@@ -390,6 +391,7 @@
 </tr>
 </tbody>
 </table>
+<p>Snackbar常用的一些属性和方法就是这些了，以后我们就可以用Snackbar代替</p>
 
       
     </div>
