@@ -98,7 +98,7 @@
 常用的标签
 标签的分类:HTML中有各种各样的标签，但是这些标签的表现形式会有很多不同之处，比如说有些标签元素独">
 <meta property="og:image" content="https://hurui1990.github.io/hurui.github.io/uploads/html_tag/divlayout.png">
-<meta property="og:updated_time" content="2017-07-14T05:40:13.000Z">
+<meta property="og:updated_time" content="2017-07-14T09:44:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="我的前端小白之旅-HTML常用的标签元素">
 <meta name="twitter:description" content="开个头上一篇我们了解了一个HTML文档的基本组成，那么接下来，我们就可以在HTML文档中自由的发挥，构建一个让自己满意的网页。但是在这之前，我们还是要先了解一下HTML中一些常用的标签元素，这些元素就像一块块的砖头一样，能够构建一个伟大的Web页面。好了，话不多说，让我们进入主题吧。
@@ -376,8 +376,9 @@
 <p></p><h2>常用的标签</h2><p></p>
 <h3 id="标签的分类"><a href="#标签的分类" class="headerlink" title="标签的分类:"></a>标签的分类:</h3><p>HTML中有各种各样的标签，但是这些标签的表现形式会有很多不同之处，比如说有些标签元素独自占用一行，而有些标签元素却在同一行中一次排列。所以对于所有的HTML标签元素，我们进行了一个分类：块状元素、内联元素和内联块状元素。下面我们一个个的说一下这三种标签元素的特点<br><strong>块状元素:</strong><br>块状元素有如下的几个特点:<br>1、块状元素在HTML布局中是独占一行的，即开始于新的一行，后面的元素也必须要另起一行才行<br>2、块状元素是可以设置宽高以及边距,块状元素的宽度默认情况下撑满父级元素，即默认情况下宽度为100%<br>常见的块状元素有:&lt;div&gt;、&lt;p&gt;、&lt;form&gt;、&lt;ul&gt;、&lt;h1&gt;…<br><strong>内联元素（行内元素）:</strong><br>内联元素有如下的几个特点：<br>1、内联元素在布局中不能独占一行，内联元素之间会在同一行上一次排列<br>2、内联元素不能设置宽高和上下边距,内联元素的宽高刚好包裹住它所包含的内容<br>常见的内联元素有：&lt;a&gt;、&lt;span&gt;、&lt;strong&gt;、&lt;em&gt;…<br><strong>内联块状元素:</strong><br>内联块状元素有如下的几个特点：<br>1、内联块状元素与其他元素都在同一行上<br>2、元素的的宽高、上下边距都可以进行设置<br>常见的内联块状元素有：&lt;img&gt;、&lt;input&gt;</p>
 <h3 id="常用标签的用法"><a href="#常用标签的用法" class="headerlink" title="常用标签的用法:"></a>常用标签的用法:</h3><p><strong>1、&lt;div&gt;标签</strong><br>该标签主要是为作为一个大的布局模块使用的，比如说一个页面分为四个部分：头部、侧边栏、底部和主体内容，这样的情况下每个部分都可以分别放在一个&lt;div&gt;中，作为一个大的模块进行布局。例如下面的代码：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"header_tag"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"aside_tag"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"main_tag"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"footer_tag"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>在代码中我们用css样式将这四个部分按下图的方式摆放<br><img src="https://hurui1990.github.io/hurui.github.io/uploads/html_tag/divlayout.png" alt="cmd-markdown-logo"><br>每种颜色的区域都代表一个&lt;div&gt;</p>
-<p><strong>2、&lt;a&gt;标签</strong></p>
+<p>在代码中我们用css样式将这四个部分按下图的方式摆放<br><img src="https://hurui1990.github.io/hurui.github.io/uploads/html_tag/divlayout.png" alt="cmd-markdown-logo"><br>每种颜色的区域都是包含在一个&lt;div&gt;之中的。所以&lt;div&gt;主要是用于包裹一个大的模块的布局。</p>
+<p><strong>2、&lt;a&gt;标签</strong><br>&lt;a&gt;标签主要是定义一个超链接，从一个页面跳转到另一个页面。我们可以通过<em style="color: blue;">“href”</em>这个属性定义要跳转的页面,然后通过<em style="color: blue;">“target”</em>这个属性定义该链接在何处打开链接文档。关于target属性的值可以到<a href="http://www.w3school.com.cn/tags/att_a_target.asp" style="color: blue;" target="_blank" rel="external">HTML &lt;a&gt;&gt; 标签的 target 属性</a>中进行查看。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://www.baidu.com"</span> <span class="attr">target</span>=<span class="string">"_blank"</span>&gt;</span>跳转到百度页面<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>此时点击该标签的话，就会打开一个新的页面，并且会直接访问到百度的首页。</p>
 <p><strong>3、&lt;img&gt;标签</strong></p>
 <p><strong>4、&lt;span&gt;标签</strong></p>
 <p><strong>5、&lt;ul&gt;标签</strong></p>
@@ -385,9 +386,6 @@
 <p><strong>7、&lt;form&gt;标签</strong></p>
 <p><strong>8、&lt;h1&gt;标签</strong></p>
 <style type="text/css">
-    h2{
-        background: #B8C0B9;
-    }
     strong{
         font-size: 1.2em;
     }
