@@ -1698,7 +1698,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff53b0;
+  background: #9690c1;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2784,12 +2784,4 @@ hr {
     width: auto;
     text-align: center;
   }
-}
-body {
-  background: url("https://hurui1990.github.io/hurui.github.io/images/background.png");
-  background-repeat: no-repeat;
-  opacity: 0.6;
-}
-body > div {
-  opacity: 1;
 }
