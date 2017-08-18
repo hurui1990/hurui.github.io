@@ -71,7 +71,7 @@
 <link href="/hurui.github.io/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android,自定义View,Graphics2D," />
+  <meta name="keywords" content="Android,自定义View,Graphics2D,Path," />
 
 
 
@@ -87,16 +87,19 @@
 
 
 
-<meta name="description" content="安安静静地写代码">
+<meta name="description" content="在2D绘图中，Path路径绘制的功能无疑是最强大的，因为它不仅可以绘制任何形状的图形，还可以添加那些规则的图形，基本上图形绘制上的所有事情都可以做。那么接下来我们就具体说一说Path路径绘制的具体使用。
+Path类的创建创建Path类有两种方式1、Path path = new Path() 无参构造函数2、Path path = new Path(Path src) 通过另外一个Path实例来创">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android自定义View之2D图形绘制(二)">
 <meta property="og:url" content="https://hurui1990.github.io/2017/08/18/Android自定义View之2D图形绘制(二)/index.html">
 <meta property="og:site_name" content="胡里胡涂的博客">
-<meta property="og:description" content="安安静静地写代码">
-<meta property="og:updated_time" content="2017-08-18T07:22:12.000Z">
+<meta property="og:description" content="在2D绘图中，Path路径绘制的功能无疑是最强大的，因为它不仅可以绘制任何形状的图形，还可以添加那些规则的图形，基本上图形绘制上的所有事情都可以做。那么接下来我们就具体说一说Path路径绘制的具体使用。
+Path类的创建创建Path类有两种方式1、Path path = new Path() 无参构造函数2、Path path = new Path(Path src) 通过另外一个Path实例来创">
+<meta property="og:updated_time" content="2017-08-18T08:43:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android自定义View之2D图形绘制(二)">
-<meta name="twitter:description" content="安安静静地写代码">
+<meta name="twitter:description" content="在2D绘图中，Path路径绘制的功能无疑是最强大的，因为它不仅可以绘制任何形状的图形，还可以添加那些规则的图形，基本上图形绘制上的所有事情都可以做。那么接下来我们就具体说一说Path路径绘制的具体使用。
+Path类的创建创建Path类有两种方式1、Path path = new Path() 无参构造函数2、Path path = new Path(Path src) 通过另外一个Path实例来创">
 
 
 
@@ -363,7 +366,9 @@
       
 
       
-        
+        <p>在2D绘图中，Path路径绘制的功能无疑是最强大的，因为它不仅可以绘制任何形状的图形，还可以添加那些规则的图形，基本上图形绘制上的所有事情都可以做。那么接下来我们就具体说一说Path路径绘制的具体使用。</p>
+<h2 id="Path类的创建"><a href="#Path类的创建" class="headerlink" title="Path类的创建"></a>Path类的创建</h2><p>创建Path类有两种方式<br>1、Path path = new Path() 无参构造函数<br>2、Path path = new Path(Path src) 通过另外一个Path实例来创建一个新的Path</p>
+<h2 id="Path的功能"><a href="#Path的功能" class="headerlink" title="Path的功能"></a>Path的功能</h2><h3 id="Path添加线条"><a href="#Path添加线条" class="headerlink" title="Path添加线条"></a>Path添加线条</h3><h3 id="Path添加矩形、椭圆、弧线"><a href="#Path添加矩形、椭圆、弧线" class="headerlink" title="Path添加矩形、椭圆、弧线"></a>Path添加矩形、椭圆、弧线</h3><h3 id="Path添加曲线和贝塞尔曲线"><a href="#Path添加曲线和贝塞尔曲线" class="headerlink" title="Path添加曲线和贝塞尔曲线"></a>Path添加曲线和贝塞尔曲线</h3><h3 id="Path图形进行计算"><a href="#Path图形进行计算" class="headerlink" title="Path图形进行计算"></a>Path图形进行计算</h3>
       
     </div>
 
@@ -391,6 +396,8 @@
             <a href="/hurui.github.io/tags/自定义View/" rel="tag"># 自定义View</a>
           
             <a href="/hurui.github.io/tags/Graphics2D/" rel="tag"># Graphics2D</a>
+          
+            <a href="/hurui.github.io/tags/Path/" rel="tag"># Path</a>
           
         </div>
       
@@ -457,8 +464,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/hurui.github.io/uploads/icon.png"
@@ -491,7 +507,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/hurui.github.io/tags">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -536,6 +552,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Path类的创建"><span class="nav-number">1.</span> <span class="nav-text">Path类的创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Path的功能"><span class="nav-number">2.</span> <span class="nav-text">Path的功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Path添加线条"><span class="nav-number">2.1.</span> <span class="nav-text">Path添加线条</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Path添加矩形、椭圆、弧线"><span class="nav-number">2.2.</span> <span class="nav-text">Path添加矩形、椭圆、弧线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Path添加曲线和贝塞尔曲线"><span class="nav-number">2.3.</span> <span class="nav-text">Path添加曲线和贝塞尔曲线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Path图形进行计算"><span class="nav-number">2.4.</span> <span class="nav-text">Path图形进行计算</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
