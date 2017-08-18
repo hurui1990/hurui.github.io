@@ -1,0 +1,753 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/hurui.github.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/hurui.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/hurui.github.io/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,自定义View,Graphics2D," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/hurui.github.io/uploads/fava.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="关于Graphics2D图形绘制Graphics2D是Android SDK提供的一个用于绘制图形的API，我们平时所见的各种规则或者不规则的图形(点、线、面、弧线、扇形等等)基本上都能通过Graphics2D绘制出来。
+常见的绘图方法Point类和PointF类区别共同点：这两个类都实现了Parcelable接口，可以实现序列化和反序列化。两个类都定义了两个成员变量x和y，用于确定点的绘制坐标差">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android自定义View之2D图形绘制(一)">
+<meta property="og:url" content="https://hurui1990.github.io/2017/08/18/Android自定义View之2D图形绘制(一)/index.html">
+<meta property="og:site_name" content="胡里胡涂的博客">
+<meta property="og:description" content="关于Graphics2D图形绘制Graphics2D是Android SDK提供的一个用于绘制图形的API，我们平时所见的各种规则或者不规则的图形(点、线、面、弧线、扇形等等)基本上都能通过Graphics2D绘制出来。
+常见的绘图方法Point类和PointF类区别共同点：这两个类都实现了Parcelable接口，可以实现序列化和反序列化。两个类都定义了两个成员变量x和y，用于确定点的绘制坐标差">
+<meta property="og:updated_time" content="2017-08-18T07:20:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android自定义View之2D图形绘制(一)">
+<meta name="twitter:description" content="关于Graphics2D图形绘制Graphics2D是Android SDK提供的一个用于绘制图形的API，我们平时所见的各种规则或者不规则的图形(点、线、面、弧线、扇形等等)基本上都能通过Graphics2D绘制出来。
+常见的绘图方法Point类和PointF类区别共同点：这两个类都实现了Parcelable接口，可以实现序列化和反序列化。两个类都定义了两个成员变量x和y，用于确定点的绘制坐标差">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/hurui.github.io/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://hurui1990.github.io/2017/08/18/Android自定义View之2D图形绘制(一)/"/>
+
+
+
+
+
+  <title> Android自定义View之2D图形绘制(一) | 胡里胡涂的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/hurui.github.io/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">胡里胡涂的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/hurui.github.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/hurui.github.io/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/hurui.github.io/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/hurui.github.io/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/hurui.github.io/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://hurui1990.github.io/hurui.github.io/2017/08/18/Android自定义View之2D图形绘制(一)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="胡里胡涂">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/hurui.github.io/uploads/icon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="胡里胡涂的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android自定义View之2D图形绘制(一)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T10:21:46+08:00">
+                2017-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/hurui.github.io/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="关于Graphics2D图形绘制"><a href="#关于Graphics2D图形绘制" class="headerlink" title="关于Graphics2D图形绘制"></a>关于Graphics2D图形绘制</h2><p>Graphics2D是Android SDK提供的一个用于绘制图形的API，我们平时所见的各种规则或者不规则的图形(点、线、面、弧线、扇形等等)基本上都能通过Graphics2D绘制出来。</p>
+<h2 id="常见的绘图方法"><a href="#常见的绘图方法" class="headerlink" title="常见的绘图方法"></a>常见的绘图方法</h2><h3 id="Point类和PointF类"><a href="#Point类和PointF类" class="headerlink" title="Point类和PointF类"></a>Point类和PointF类</h3><h4 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h4><p>共同点：这两个类都实现了Parcelable接口，可以实现序列化和反序列化。两个类都定义了两个成员变量x和y，用于确定点的绘制坐标<br>差异：Point的成员变量x和y是int类型的，PointF的成员变量x和y是float类型的，更加精确</p>
+<h4 id="常用的方法"><a href="#常用的方法" class="headerlink" title="常用的方法"></a>常用的方法</h4><p>1、set(int x, int y) 通过x，y设置点的坐标位置<br>2、<span style="color: #ff0000">set(PointF pointf) 通过另一个PointF的位置来设置(PointF独有)</span><br>3、negate() 将x，y取反<br>4、offset(int x, int y) 设置偏移量<br>5、<span style="color: #ff0000">length(float x, float y)  计算坐标原点到(x,y)的直线距离(PointF独有)</span></p>
+<h3 id="Rect类和RectF类"><a href="#Rect类和RectF类" class="headerlink" title="Rect类和RectF类"></a>Rect类和RectF类</h3><h4 id="区别-1"><a href="#区别-1" class="headerlink" title="区别"></a>区别</h4><p>这两个类都可以进行序列化和反序列化的操作，在方法调用上基本没有差别，只是参数精度的不一样，Rect的参数是int类型，而RectF的参数是float类型的</p>
+<h4 id="常用的方法-1"><a href="#常用的方法-1" class="headerlink" title="常用的方法"></a>常用的方法</h4><p>1、new Rect() 创建一个Rect的实例<br>2、new Rect(int left, int top, int right, int bottom) 创建一个实例并指定位置和宽高（left：左边线距离Y轴的距离，top：上边线距离X轴的距离，right：右边线距离Y周的距离，bottom：下边线距离X轴的距离）<br>3、new Rect(Rect r) 通过另外一个Rect创建一个新的Rect，<span style="color: #ff0000">RectF也可以通过这种方法创建</span><br>4、isEmpty()判断该矩形是否为空，即面积是否为0<br>5、setEmpty()将矩形四条边线的距离均设置为0<br>6、width() 返回矩形的宽度<br>7、height()返回矩形的高度<br>8、centerX()返回矩形中心的x坐标（int类型）<br>9、centerY()返回矩形中心的y坐标（int类型）<br>10、exactCenterX()返回矩形中心的x坐标（float类型）<br>11、exactCenterY()返回矩形中心的y坐标（float类型）<br>12、set(int left, int top, int right, int bottom)通过四条边线重新设置位置和宽高<br>13、set(Rect r)通过另外一个Rect重新设置位置和宽高<br>14、offset(int dx, int dy) 将矩形按X轴移动dx距离，按Y轴移动dy距离，相对定位<br>15、offsetTo(int newLeft, int newTop) 将矩形按X轴移动newLeft距离，按Y轴移动newTop距离，绝对定位<br>16、inset(int dx, int dy)对矩形进行缩放处理<br>17、contains(int x, int y)判断（x， y）这个点是否在矩形内<br>18、contains(int left, int top, int right, int bottom)、contains(Rect r)判断另外一个矩形是否在这个矩形的内部<br>19、intersect(Rect r) 两个矩形的交集<br>20、union（Rect r）两个矩形的并集</p>
+<h3 id="Bitmap类"><a href="#Bitmap类" class="headerlink" title="Bitmap类"></a>Bitmap类</h3><h4 id="常用的创建方法"><a href="#常用的创建方法" class="headerlink" title="常用的创建方法"></a>常用的创建方法</h4><p>创建一个空白的Bitmap：<br>Bitmap bitmap = Bitmap.createBitmap(1000, 1600, Bitmap.Config.ARGB_8888); 创建了一个宽1000，高1600，存储格式为ARGB_8888的空白图片<br>读取图片：<br>1、BitmapFactory.decodeStream(InputStream is) 从数据流中读取图片信息转换成bitmap<br>2、BitmapFactory.decodeByteArray(byte[] data, int offset, int length) 从字节数组中读取图片信息并转换成bitmap<br>3、BitmapFactory.decodeResource(Resources res, int id) 从资源文件中读取图片信息并转换成bitmap<br>4、BitmapFactory.decodeFile(String pathName) 从图片文件中读取图片信息并转换成bitmap</p>
+<h4 id="其他的常用方法："><a href="#其他的常用方法：" class="headerlink" title="其他的常用方法："></a>其他的常用方法：</h4><p>1、copy(Config config, boolean isMutable) 复制Bitmap， isMutable为true时表示复制的新位图可以修改<br>2、isRecycled() 判断位图资源是否已经回收<br>3、recycle() 回收bitmap内存</p>
+<h3 id="Paint类和Canvas类"><a href="#Paint类和Canvas类" class="headerlink" title="Paint类和Canvas类"></a>Paint类和Canvas类</h3><p>Paint类我们可以理解为画笔，Canvas就是画布了，通过画笔和画布的结合，我们才能画出自己想要的图形</p>
+<h4 id="Paint类常用方法"><a href="#Paint类常用方法" class="headerlink" title="Paint类常用方法"></a>Paint类常用方法</h4><p>1、setColor(int color) 设置颜色<br>2、setAlpha(int a) 设置透明度<br>3、setARGB(int a, int r, int g, int b) 通过设定argb的具体值来设置颜色<br>4、setTextSize(float textSize) 设置字体大小<br>5、setTextAlign(Paint.Align align) 设置文本的对齐方式（有三个值可选：Paint.Align.LEFT, Paint.Align.CENTER, Paint.Align.RIGHT ）<br>6、setTextSkewX(float skewx) 设置文本的倾斜度（在0～1之间取值，正负值表示倾斜的方向）<br>7、setUnderlineText(boolean underline) 给文本设置下划线<br>8、setFakeBoldText(boolean bold) 设置文本粗体<br>9、setStrikeThruText(boolean strike) 设置文本的删除线<br>10、setStyle(Paint.Style style) 设置样式（三个值可选：FILL-实心， STROKE-空心， FILL_AND_STROKE-同时使用实心和空心）<br>11、setsStrokeJoin(Paint.Join join) 当样式为STROKE时，指定线条连接处的拐角样式（三个值可选：BEVEL-斜角， MITER-直角， ROUND-圆角）<br>12、setStrokeCap(Paint.Cap cap) 设置画笔离开画布时留下的最后一点图形 （三个值可选：BUTT， ROUND， SQUARE）<br>13、setStrokeWidth(float width) 设置线条的宽度</p>
+<h4 id="Canvas类常用方法"><a href="#Canvas类常用方法" class="headerlink" title="Canvas类常用方法"></a>Canvas类常用方法</h4><h5 id="绘制Bitmap"><a href="#绘制Bitmap" class="headerlink" title="绘制Bitmap"></a>绘制Bitmap</h5><p>1、drawBitmap(Bitmap bitmap, float left, float top, Paint paint) 将bitmap绘制到画布上<br>2、dewaBitmap(Bitmap bitmap, Rect src, Rect des, Paint paint) 将bitmap按照src进行裁剪，并且按照des的位置和大小绘制到画布上</p>
+<h5 id="绘制点"><a href="#绘制点" class="headerlink" title="绘制点"></a>绘制点</h5><p>1、drawPoint(float x, float y, Paint paint) 将点（x, y）绘制到画布上<br>2、drawPoints(float[] pts, Paint paint) 将pts中的点按顺序依次取两个值作为x，y绘制到画布上，多余的数字会自动忽略<br>3、drawPoints(float[] pts, int offset, int count, Paint paint) 将数组中的数，从offset处开始取count个，绘制到画布上</p>
+<h5 id="绘制线"><a href="#绘制线" class="headerlink" title="绘制线"></a>绘制线</h5><p>1、drawLine(float startX, float startY, float stopX, float stopY, Paint paint) 在起点（startX, startY）和终点（stopX, stopY）间绘制一条直线<br>2、drawLines(float[] pts, Paint paint) 将pts中的点按顺序依次取四个值作为起始点坐标绘制线条到画布上，多余的数字会自动忽略<br>3、drawLines(float[] pts, int offset, int count, Paint paint) 将数组中的数，从offset处开始取count个，绘制到画布上</p>
+<h5 id="绘制矩形"><a href="#绘制矩形" class="headerlink" title="绘制矩形"></a>绘制矩形</h5><h6 id="直角矩形"><a href="#直角矩形" class="headerlink" title="直角矩形"></a>直角矩形</h6><p>1、drawRect(float left, float top, float right, float bottom, Paint paint)<br>2、drawRect(Rect r, Paint paint)<br>3、drawRect(RectF r, Paint paint)</p>
+<h6 id="圆角矩形"><a href="#圆角矩形" class="headerlink" title="圆角矩形"></a>圆角矩形</h6><p>1、drawRoundRect(float left, float top, float right, float bottom, float rx, float ry Paint paint) 圆角半径为rx和ry<br>2、drawRoundRect(Rect r, float rx, float ry Paint paint) 圆角半径为rx和ry</p>
+<h5 id="绘制圆"><a href="#绘制圆" class="headerlink" title="绘制圆"></a>绘制圆</h5><h6 id="椭圆"><a href="#椭圆" class="headerlink" title="椭圆"></a>椭圆</h6><p>1、drawOval(float left, float top, float right, float bottom, Paint paint)<br>2、drawOval(Rect oval, Paint paint) </p>
+<h6 id="圆"><a href="#圆" class="headerlink" title="圆"></a>圆</h6><p>1、drawCircle(float cx, float cy, float radius, Paint paint) 绘制中心点为(ce, cy), 半径为radius的圆形</p>
+<h6 id="扇形和弧线"><a href="#扇形和弧线" class="headerlink" title="扇形和弧线"></a>扇形和弧线</h6><p>1、drawArc(float left, float top, float right, float bottom, float startAngle, float sweepAngle, boolean useCenter, Paint paint)<br>2、drawArc(RectF oval, float startAngle, float sweepAngle, boolean useCenter, Paint paint)<br>startAngle为起始角度，sweepAngle为占用角度，useCenter为true表示扇形，为false表示弧线</p>
+<h5 id="绘制路径"><a href="#绘制路径" class="headerlink" title="绘制路径"></a>绘制路径</h5><p>1、drawPath(Path path, Paint paint) 将路径path绘制到画布上<br>由于Path路径绘制里面有很多东西需要讲，所以我会在下一篇中单独讲一下Path路径绘制的内容</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/hurui.github.io/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/hurui.github.io/tags/自定义View/" rel="tag"># 自定义View</a>
+          
+            <a href="/hurui.github.io/tags/Graphics2D/" rel="tag"># Graphics2D</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/hurui.github.io/2017/08/16/Android自定义日历控件/" rel="next" title="Android自定义日历控件">
+                <i class="fa fa-chevron-left"></i> Android自定义日历控件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/hurui.github.io/2017/08/18/Android自定义View之2D图形绘制/" rel="prev" title="Android自定义View之2D图形绘制(二)">
+                Android自定义View之2D图形绘制(二) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/hurui.github.io/uploads/icon.png"
+               alt="胡里胡涂" />
+          <p class="site-author-name" itemprop="name">胡里胡涂</p>
+           
+              <p class="site-description motion-element" itemprop="description">安安静静地写代码</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/hurui.github.io/archives">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/hurui.github.io/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/hurui.github.io/tags">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hurui1990" target="_blank" title="我的GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  我的GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/hurui19900507" target="_blank" title="我的CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于Graphics2D图形绘制"><span class="nav-number">1.</span> <span class="nav-text">关于Graphics2D图形绘制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的绘图方法"><span class="nav-number">2.</span> <span class="nav-text">常见的绘图方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Point类和PointF类"><span class="nav-number">2.1.</span> <span class="nav-text">Point类和PointF类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#区别"><span class="nav-number">2.1.1.</span> <span class="nav-text">区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用的方法"><span class="nav-number">2.1.2.</span> <span class="nav-text">常用的方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rect类和RectF类"><span class="nav-number">2.2.</span> <span class="nav-text">Rect类和RectF类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#区别-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用的方法-1"><span class="nav-number">2.2.2.</span> <span class="nav-text">常用的方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bitmap类"><span class="nav-number">2.3.</span> <span class="nav-text">Bitmap类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常用的创建方法"><span class="nav-number">2.3.1.</span> <span class="nav-text">常用的创建方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他的常用方法："><span class="nav-number">2.3.2.</span> <span class="nav-text">其他的常用方法：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Paint类和Canvas类"><span class="nav-number">2.4.</span> <span class="nav-text">Paint类和Canvas类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Paint类常用方法"><span class="nav-number">2.4.1.</span> <span class="nav-text">Paint类常用方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Canvas类常用方法"><span class="nav-number">2.4.2.</span> <span class="nav-text">Canvas类常用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#绘制Bitmap"><span class="nav-number">2.4.2.1.</span> <span class="nav-text">绘制Bitmap</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#绘制点"><span class="nav-number">2.4.2.2.</span> <span class="nav-text">绘制点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#绘制线"><span class="nav-number">2.4.2.3.</span> <span class="nav-text">绘制线</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#绘制矩形"><span class="nav-number">2.4.2.4.</span> <span class="nav-text">绘制矩形</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#直角矩形"><span class="nav-number">2.4.2.4.1.</span> <span class="nav-text">直角矩形</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#圆角矩形"><span class="nav-number">2.4.2.4.2.</span> <span class="nav-text">圆角矩形</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#绘制圆"><span class="nav-number">2.4.2.5.</span> <span class="nav-text">绘制圆</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#椭圆"><span class="nav-number">2.4.2.5.1.</span> <span class="nav-text">椭圆</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#圆"><span class="nav-number">2.4.2.5.2.</span> <span class="nav-text">圆</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#扇形和弧线"><span class="nav-number">2.4.2.5.3.</span> <span class="nav-text">扇形和弧线</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#绘制路径"><span class="nav-number">2.4.2.6.</span> <span class="nav-text">绘制路径</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">胡里胡涂</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/hurui.github.io/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/hurui.github.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/hurui.github.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/hurui.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/hurui.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/hurui.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/hurui.github.io/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/hurui.github.io/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/hurui.github.io/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/hurui.github.io/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/hurui.github.io/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
