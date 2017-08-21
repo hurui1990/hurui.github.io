@@ -104,7 +104,7 @@ Path类的创建创建Path类有两种方式1、Path path = new Path() 无参构
 <meta property="og:image" content="https://hurui1990.github.io/hurui.github.io/uploads/custom_view/pathquto.png">
 <meta property="og:image" content="https://hurui1990.github.io/hurui.github.io/uploads/custom_view/pathquto2.png">
 <meta property="og:image" content="https://hurui1990.github.io/hurui.github.io/uploads/custom_view/pathcubic.png">
-<meta property="og:updated_time" content="2017-08-21T05:35:25.000Z">
+<meta property="og:updated_time" content="2017-08-21T05:45:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android自定义View之2D图形绘制(二)">
 <meta name="twitter:description" content="在2D绘图中，Path路径绘制的功能无疑是最强大的，因为它不仅可以绘制任何形状的图形，还可以添加那些规则的图形，基本上图形绘制上的所有事情都可以做。那么接下来我们就具体说一说Path路径绘制的具体使用。
@@ -405,7 +405,38 @@ Path类的创建创建Path类有两种方式1、Path path = new Path() 无参构
 <h4 id="三阶贝塞尔曲线"><a href="#三阶贝塞尔曲线" class="headerlink" title="三阶贝塞尔曲线"></a>三阶贝塞尔曲线</h4><p>三阶贝塞尔曲线总共有四个点来对曲线的形状进行控制，分别是：起点，终点和两个控制点<br>三阶贝塞尔曲线可以画出比二阶贝塞尔曲线更加不规则的曲线图形</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">Bitmap bitmap = Bitmap.createBitmap(<span class="number">1080</span>, <span class="number">1600</span>, Bitmap.Config.ARGB_8888);</div><div class="line"></div><div class="line">Canvas canvas = <span class="keyword">new</span> Canvas(bitmap);</div><div class="line">Paint paint = <span class="keyword">new</span> Paint();</div><div class="line">paint.setColor(Color.RED);</div><div class="line">paint.setStyle(Paint.Style.STROKE);</div><div class="line">paint.setStrokeWidth(<span class="number">5</span>);</div><div class="line"></div><div class="line">Path path = <span class="keyword">new</span> Path();</div><div class="line">path.moveTo(<span class="number">10</span>, <span class="number">100</span>);</div><div class="line">path.cubicTo(<span class="number">210</span>, <span class="number">400</span>, <span class="number">800</span>, <span class="number">200</span>,<span class="number">1010</span>, <span class="number">600</span>);</div><div class="line"></div><div class="line">canvas.drawPath(path, paint);</div><div class="line">mImageView.setImageBitmap(bitmap);</div></pre></td></tr></table></figure>
 <p>效果图如下：<br><img src="https://hurui1990.github.io/hurui.github.io/uploads/custom_view/pathcubic.png" alt="cmd-markdown-logo"><br>三阶贝塞尔曲线与二阶的一样，有相对和绝对定位之分：<br>绝对定位：cubicTo<br>相对定位：rCubicTo</p>
-<h3 id="Path图形进行计算"><a href="#Path图形进行计算" class="headerlink" title="Path图形进行计算"></a>Path图形进行计算</h3>
+<h3 id="Path图形进行计算"><a href="#Path图形进行计算" class="headerlink" title="Path图形进行计算"></a>Path图形进行计算</h3><p>Path图形计算我们可以简单的理解为两个图形部分重叠在一起的时候，我们需要选取的是那部分，在Path中总共有五种情况，我们可以通过下表看一下：</p>
+<table>
+<thead>
+<tr>
+<th>Path图形计算方式</th>
+<th style="text-align:center">说明(path1和path2代表两个图形)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DIFFERENCE</td>
+<td style="text-align:center">path1去除与path2重叠部分的剩余图形</td>
+</tr>
+<tr>
+<td>INTERSECT</td>
+<td style="text-align:center">path1和path2的交集</td>
+</tr>
+<tr>
+<td>REVERSE_DIFFERENCE</td>
+<td style="text-align:center">与DIFFERENCE相反，path2去除与path1重叠部分的剩余图形</td>
+</tr>
+<tr>
+<td>UNION</td>
+<td style="text-align:center">path1和path2的并集</td>
+</tr>
+<tr>
+<td>XOR</td>
+<td style="text-align:center">path1和path2的并集减掉path1和path2的交集</td>
+</tr>
+</tbody>
+</table>
+
       
     </div>
 
